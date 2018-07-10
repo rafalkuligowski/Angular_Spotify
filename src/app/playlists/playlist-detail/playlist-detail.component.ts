@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Playlist } from 'src/app/model/playlist';
 
 @Component({
@@ -7,13 +7,9 @@ import { Playlist } from 'src/app/model/playlist';
   styleUrls: ['./playlist-detail.component.css']
 })
 export class PlaylistDetailComponent implements OnInit {
-
-	playlist: Playlist = {
-		id: 123,
-		name: 'New hit',
-		color: '#ff0000',
-		favourite: true,
-	};
+	
+	@Input('selected-item')
+	playlist: Playlist;
 
   constructor() { }
 

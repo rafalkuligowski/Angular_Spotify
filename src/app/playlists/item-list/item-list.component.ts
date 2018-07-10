@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Playlist } from '../../model/playlist';
 
 @Component({
@@ -7,31 +7,13 @@ import { Playlist } from '../../model/playlist';
   styleUrls: ['./item-list.component.css']
 })
 export class ItemListComponent implements OnInit {
-
+	
+	@Input('items')
+	playlists: Playlist[] = []
 	selected = null
 	select(playlist) {
 		this.selected = playlist
 	}
-	playlists: Playlist[] = [
-		{
-			id: 123,
-			name: 'New hit 123',
-			color: '#ff0000',
-			favourite: true,
-		},
-		{
-			id: 234,
-			name: 'New hit 234',
-			color: '#00ff00',
-			favourite: false,
-		},
-		{
-			id: 456,
-			name: 'New hit 567',
-			color: '#0000ff',
-			favourite: false,
-		}
-	];
   constructor() { }
 
   ngOnInit() {
