@@ -8,6 +8,10 @@ import { Playlist } from '../../model/playlist';
 })
 export class ItemListComponent implements OnInit {
 
+	selected = null
+	select(playlist) {
+		this.selected = playlist
+	}
 	playlists: Playlist[] = [
 		{
 			id: 123,

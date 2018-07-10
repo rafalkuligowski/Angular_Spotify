@@ -1,8 +1,6 @@
-<p>
-	item-list works!
-</p>
+
 <div class="list-group">
-	<div class="list-group-item" *ngFor="let playlist of playlists; index as i">
+	<div class="list-group-item" *ngFor="let playlist of playlists; index as i" [class.active]=" playlist == selected " (click)="select(playlist)">
 		{{i+1}}. {{playlist.name}}
 	</div>
 </div>
