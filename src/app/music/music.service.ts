@@ -43,12 +43,12 @@ export class MusicService {
 		}
 	]
 
-	getAlbums(query = 'cos') {
+	getAlbums(query = 'batman') {
 		const token = this.auth.getToken()
 		if(!token) {
 			return
 		}
-		this.http.get(this.url,{
+		return this.http.get(this.url,{
 			headers:{
 				Authorization: 'Bearer '+token
 			},
@@ -56,10 +56,7 @@ export class MusicService {
 				type: 'album',
 				q: query
 			}
-		}).subscribe(resp => {
-			console.log('odpowiedz', resp)
 		})
-		return this.albums
 
 	}
 	constructor(
