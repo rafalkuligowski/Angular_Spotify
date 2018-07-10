@@ -1,10 +1,11 @@
 <div class="container">
 	<div class="row">
 		<div class="col">
-			<app-item-list [items]="playlists"></app-item-list>
+			<app-item-list [items]="playlists"
+							(selectedChange)="selected = $event"></app-item-list>
 		</div>
 		<div class="col">
-			<app-playlist-detail [selected-item]="selected"></app-playlist-detail>
+			<app-playlist-detail [playlist]="selected"></app-playlist-detail>
 		</div>
 	</div>
 </div>
