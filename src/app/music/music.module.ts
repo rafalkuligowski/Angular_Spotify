@@ -4,10 +4,12 @@ import { MusicSearchComponent } from './music-search/music-search.component';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { AlbumGridComponent } from './album-grid/album-grid.component';
 import { AlbumItemComponent } from './album-item/album-item.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
-    CommonModule
+	CommonModule,
+	HttpClientModule
   ],
   declarations: [MusicSearchComponent, SearchFormComponent, AlbumGridComponent, AlbumItemComponent],
   exports: [MusicSearchComponent],

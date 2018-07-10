@@ -1,5 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Album } from '../model/album';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../auth.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -41,11 +43,28 @@ export class MusicService {
 		}
 	]
 
-	getAlbums() {
-		return this.albums;
+	getAlbums(query = 'cos') {
+		const token = this.auth.getToken()
+		if(!token) {
+			return
+		}
+		this.http.get(this.url,{
+			headers:{
+				Authorization: 'Bearer ??'
+			},
+			params:{
+				type: 'album',
+				q: query
+			}
+		}).subscribe(resp => {
+			console.log('odpowiedz', resp)
+		})
+		return this.albums
+
 	}
 	constructor(
-		@Inject('SEARCH_URL')
-		private url: string
+		@Inject('SEARCH_URL') private url: string,
+		private http:HttpClient,
+		private auth: AuthService
 	) { }
 }
