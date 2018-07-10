@@ -16,15 +16,24 @@ export class AuthService {
 				redirect_uri: "http://localhost:4200/"
 			}
 		});
-		console.log( url + '?' + p.toString())
+		window.location.replace( url + '?' + p.toString() )
 	}
 	token = null;
 
 	getToken() {
+		const hash = window.location.hash.substr(1)
+		if(hash) {
+			const p = new HttpParams({
+				fromString: hash
+			})
+			this.token = p.get('access_token')
+		}
+
 		if (!this.token) {
 			this.authorize()
 			return;
 		}
+		return this.token;
 	}
 
   constructor() { }

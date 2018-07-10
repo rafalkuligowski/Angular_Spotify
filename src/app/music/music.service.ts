@@ -50,7 +50,7 @@ export class MusicService {
 		}
 		this.http.get(this.url,{
 			headers:{
-				Authorization: 'Bearer ??'
+				Authorization: 'Bearer '+token
 			},
 			params:{
 				type: 'album',
