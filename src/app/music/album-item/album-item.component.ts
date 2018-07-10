@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Album } from '../../model/album';
 
 @Component({
   selector: 'app-album-item',
@@ -6,22 +7,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./album-item.component.css']
 })
 export class AlbumItemComponent implements OnInit {
-
-	//testowe dane
-	albums: Album[] = [
-		{
-			id: '123',
-			name: "Placki",
-			artist: [],
-			images: [
-			{
-				url: "www.www.ww"
-				width: 300,
-				hei
-			}
-			]
-		}
-	]
   constructor() { }
 
   ngOnInit() {
