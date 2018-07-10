@@ -8,7 +8,7 @@ import { Playlist } from 'src/app/model/playlist';
 })
 export class PlaylistDetailComponent implements OnInit {
 	
-	@Input('selected-item')
+	@Input()
 	playlist: Playlist;
 
   constructor() { }
