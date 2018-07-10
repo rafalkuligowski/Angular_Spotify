@@ -2,10 +2,15 @@
 	<div class="row">
 		<div class="col">
 			<app-item-list [items]="playlists"
+							[selected] = "selected"
 							(selectedChange)="selected = $event"></app-item-list>
 		</div>
 		<div class="col">
-			<app-playlist-detail [playlist]="selected"></app-playlist-detail>
+			<p *ngIf="!selected">
+				Please selected playlist
+			</p>
+			<app-playlist-detail *ngIf="selected" [playlist]="selected"
+								(onSave)="save( $event )"></app-playlist-detail>
 		</div>
 	</div>
 </div>

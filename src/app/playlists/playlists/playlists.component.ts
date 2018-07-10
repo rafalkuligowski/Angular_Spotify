@@ -28,7 +28,16 @@ export class PlaylistsComponent implements OnInit {
 			favourite: false,
 		}
 	];
-	selected = this.playlists[0];
+	selected = null;
+
+	save(playlist) {
+		const index = this.playlists.findIndex(
+			p => p.id ==playlist.id
+		)
+		this.playlists.splice(index,1,playlist)
+		this.selected = playlist
+	}
+
   constructor() { }
 
   ngOnInit() {

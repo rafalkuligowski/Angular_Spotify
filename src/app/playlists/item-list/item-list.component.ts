@@ -10,7 +10,11 @@ export class ItemListComponent implements OnInit {
 	
 	@Input('items')
 	playlists: Playlist[] = []
+
+
+	@Input()
 	selected = null
+	
 
 	@Output()
 	selectedChange = new EventEmitter<Playlist>()
