@@ -12,6 +12,7 @@ import { AlbumItemComponent } from './album-item/album-item.component';
   imports: [
     CommonModule
   ],
-  declarations: [MusicSearchComponent, MusicFormComponent, MusicGridComponent, MusicItemComponent, SearchFormComponent, AlbumGridComponent, AlbumItemComponent]
+  declarations: [MusicSearchComponent, MusicFormComponent, MusicGridComponent, MusicItemComponent, SearchFormComponent, AlbumGridComponent, AlbumItemComponent],
+  exports: [MusicSearchComponent]
 })
 export class MusicModule { }
