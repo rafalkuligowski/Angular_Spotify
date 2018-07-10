@@ -1,4 +1,8 @@
 <p>
-  item-list works!
+	item-list works!
 </p>
-<app-playlist-item></app-playlist-item>
+<div class="list-group">
+	<div class="list-group-item" *ngFor="let playlist of playlists; index as i">
+		{{i+1}}. {{playlist.name}}
+	</div>
+</div>
