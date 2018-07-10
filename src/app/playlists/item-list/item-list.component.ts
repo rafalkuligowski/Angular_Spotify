@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Playlist } from '../../model/playlist';
 
 @Component({
@@ -11,8 +11,13 @@ export class ItemListComponent implements OnInit {
 	@Input('items')
 	playlists: Playlist[] = []
 	selected = null
+
+	@Output()
+	selectedChange = new EventEmitter<Playlist>()
+
 	select(playlist) {
 		this.selected = playlist
+		this.selectedChange.emit(playlist)
 	}
   constructor() { }
 
