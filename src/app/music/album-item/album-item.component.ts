@@ -7,6 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AlbumItemComponent implements OnInit {
 
+	//testowe dane
+	albums: Album[] = [
+		{
+			id: '123',
+			name: "Placki",
+			artist: [],
+			images: [
+			{
+				url: "www.www.ww"
+				width: 300,
+				hei
+			}
+			]
+		}
+	]
   constructor() { }
 
   ngOnInit() {
