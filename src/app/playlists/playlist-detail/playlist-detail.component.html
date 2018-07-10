@@ -21,7 +21,7 @@
 </div>
 
 
-<div class="div" *ngIf="mode=='edit'">
+<form *ngIf="mode=='edit'" #formRef="ngForm">
 	<br>
 	<br>
 	<h3>Edit playlist</h3>
@@ -29,20 +29,20 @@
 		<label>
 			Name
 		</label>
-		<input type="text" class="form-control" [(ngModel)]="playlist.name">
+		<input type="text" class="form-control" [ngModel]="playlist.name" name="name">
 	</div>
 	<div class="form-check">
-		<input type="checkbox" class="form-check-input" [(ngModel)]="playlist.favourite">
+		<input type="checkbox" class="form-check-input" [ngModel]="playlist.favourite" name="fovourite">
 		<label>
 			Fovourite
 		</label>
 	</div>
 	<div class="form-gruop">
-		<input type="color" [(ngModel)]="playlist.color">
+		<input type="color" [ngModel]="playlist.color" name="color">
 		<label>
 			Color
 		</label>
 	</div>
 	<input type="button" class="btn btn-danger" value="Cancel" (click)="cancel()">
-	<input type="button" class="btn btn-success" value="Save" (click)="save()">
-</div>
+	<input type="button" class="btn btn-success" value="Save" (click)="save(formRef)">
+</form>

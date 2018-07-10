@@ -24,8 +24,8 @@ export class PlaylistDetailComponent implements OnInit {
   cancel() {
 	  this.mode = 'show'
   }
-  save() {
-	  console.log('save')
+  save(form) {
+	  console.log('save', form.value)
   }
 
 }
