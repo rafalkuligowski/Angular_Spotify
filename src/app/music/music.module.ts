@@ -10,6 +10,12 @@ import { AlbumItemComponent } from './album-item/album-item.component';
     CommonModule
   ],
   declarations: [MusicSearchComponent, SearchFormComponent, AlbumGridComponent, AlbumItemComponent],
-  exports: [MusicSearchComponent]
+  exports: [MusicSearchComponent],
+  providers:[
+	  {
+		  provide: 'SEARCH_URL',
+		  useValue: 'https://api.spotify.com/v1/search'
+	  }
+  ]
 })
 export class MusicModule { }
