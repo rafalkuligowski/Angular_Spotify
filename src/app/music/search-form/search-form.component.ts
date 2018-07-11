@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { filter, debounceTime } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-search-form',
@@ -19,10 +20,19 @@ export class SearchFormComponent implements OnInit {
 
 		this.queryForm
 			.get("query")
-			.valueChanges.subscribe(value => this.search(value));
+			.valueChanges
+			.pipe(
+				debounceTime(400),
+				filter(query => query.length >=3)
+			)
+			.subscribe(value => this.search(value));
 	}
+	@Output()
+	queryChange = new EventEmitter()
+
 	search(query) {
 		console.log(query);
+		this.queryChange.emit(query); 
 	}
 
 	ngOnInit() {

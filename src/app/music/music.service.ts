@@ -2,6 +2,8 @@ import { Injectable, Inject } from '@angular/core';
 import { Album } from '../model/album';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../auth.service';
+import { map, catchError } from "rxjs/operators";
+import { of } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root'
@@ -45,23 +47,31 @@ export class MusicService {
 
 	getAlbums(query = 'batman') {
 		const token = this.auth.getToken()
-		if(!token) {
+		if (!token) {
 			return
 		}
-		return this.http.get(this.url,{
-			headers:{
-				Authorization: 'Bearer '+token
+		return this.http.get<{
+			albums: { items: Album[] };
+		}>(this.url, {
+			headers: {
+				Authorization: 'Bearer ' + token
 			},
-			params:{
+			params: {
 				type: 'album',
 				q: query
 			}
-		})
+		}).pipe(
+			map(response => response.albums.items),
+			catchError((err, caught) => {
+				this.auth. authorize()
+				return of([])
+			})
+		)
 
 	}
 	constructor(
 		@Inject('SEARCH_URL') private url: string,
-		private http:HttpClient,
+		private http: HttpClient,
 		private auth: AuthService
 	) { }
 }

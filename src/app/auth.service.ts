@@ -16,6 +16,9 @@ export class AuthService {
 				redirect_uri: "http://localhost:4200/"
 			}
 		});
+
+		localStorage.removeItem("token")
+
 		window.location.replace( url + '?' + p.toString() )
 	}
 	token = null;

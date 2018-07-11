@@ -9,11 +9,21 @@ import { Album } from '../../model/album';
 })
 export class MusicSearchComponent implements OnInit {
 	albums: Album[]
+	
 	constructor(private musicService: MusicService) {
+		this.search("batman");
+
 		this.musicService.getAlbums()
-			.subscribe(resp => {
-				this.albums = resp['albums'].items
-			})
+			.subscribe(
+				albums => (this.albums = albums)
+			);
+	}
+	search(query) {
+		this.musicService
+		.getAlbums(query)
+		.subscribe(
+			albums => (this.albums = albums)
+		);		
 	}
 	ngOnInit() {
 	}
