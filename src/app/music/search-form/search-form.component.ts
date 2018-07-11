@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchFormComponent implements OnInit {
 
+	search(query) {
+		console.log(query);
+	}
+
   constructor() { }
 
   ngOnInit() {
