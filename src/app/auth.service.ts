@@ -34,9 +34,13 @@ export class AuthService {
 				fromString: hash
 			})
 			this.token = p.get('access_token')
-			localStorage.setItem("token", JSON.stringify(this.token))
-			return this.token;
+
+			if (this.token) {
+				localStorage.setItem("token", JSON.stringify(this.token))
+				return this.token;
+			}
 		}
+
 			this.authorize()
 			return;
 	}
