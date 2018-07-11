@@ -6,8 +6,9 @@
 		<div *ngIf="queryForm.get('query').getError('minlength') as error">
 			Value is to short. Min length is {{ error.requiredLength }} characters.
 		</div>
-		<div *ngIf="queryForm.get('query').hasError('censor')">
-			Not allowed
+		<div *ngIf="queryForm.get('query').getError('censor') as error">
+			Word like {{ error.badword }} not allowed.
 		</div>
+		<div *ngIf= "queryForm.pending">Please wait ...</div>
 	</div>
   </div>

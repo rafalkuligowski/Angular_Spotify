@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormControl, FormGroup, Validators, ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
-import { filter, debounceTime } from 'rxjs/operators';
+import { FormControl, FormGroup, Validators, ValidatorFn, AsyncValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
+import { filter, debounceTime, mapTo, withLatestFrom } from 'rxjs/operators';
+import { Observable, PartialObserver } from 'rxjs';
 
 @Component({
 	selector: 'app-search-form',
@@ -13,35 +14,66 @@ export class SearchFormComponent implements OnInit {
 
 	constructor() {
 
-		const censor: ValidatorFn = (control: AbstractControl): ValidationErrors => {
-			const hasError = control.value.includes('batman')
-			return hasError? {"censor": true} : null
+		const censor = (badword): ValidatorFn => (control: AbstractControl): ValidationErrors => {
+			const hasError = control.value.includes(badword)
+			return hasError ? { censor: { badword } } : null;
 		};
+
+		const asyncCensor = (badword): AsyncValidatorFn => (control: AbstractControl) => {
+			
+			const value = control.value;
+
+			return Observable.create((observer: PartialObserver<ValidationErrors | null>)=>{
+				
+				setTimeout(()=>{
+					const hasError = value.includes(badword);
+					const result = hasError ? { censor: {badword} } : null
+				
+					observer.next(result)
+					observer.complete()
+				},1000)
+			})
+		}
+		
+
+		
+
+		
+
+
+
 
 		this.queryForm = new FormGroup({
 			query: new FormControl("", [
 				Validators.required,
 				Validators.minLength(3),
-				censor
-			])
+				// censor("batman")
+			],
+			[asyncCensor("batman")])
 		});
+
 		console.log(this.queryForm);
 
-		this.queryForm
-			.get("query")
-			.valueChanges
-			.pipe(
-				debounceTime(400),
-				filter(query => query.length >=3)
-			)
-			.subscribe(value => this.search(value));
+		const value$ = this.queryForm.get("query").valueChanges.pipe(
+			filter(query => query.length >= 3)
+		)
+		const valid$ = this.queryForm.statusChanges.pipe(
+			debounceTime(400),
+			filter(status => status == "VALID"),
+				mapTo(true)
+		);
+
+		valid$
+			.pipe(withLatestFrom(value$, (valid, value) => value))
+			.subscribe(query => this.search(query));
 	}
+
+
 	@Output()
 	queryChange = new EventEmitter()
 
 	search(query) {
-		console.log(query);
-		this.queryChange.emit(query); 
+		this.queryChange.emit(query);
 	}
 
 	ngOnInit() {
