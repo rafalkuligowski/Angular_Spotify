@@ -21,19 +21,24 @@ export class AuthService {
 	token = null;
 
 	getToken() {
+		this.token = JSON.parse(localStorage.getItem('token'))
+		if (this.token) {
+			return this.token;
+		}
+
 		const hash = window.location.hash.substr(1)
+		window.location.hash = "";
+
 		if(hash) {
 			const p = new HttpParams({
 				fromString: hash
 			})
 			this.token = p.get('access_token')
+			localStorage.setItem("token", JSON.stringify(this.token))
+			return this.token;
 		}
-
-		if (!this.token) {
 			this.authorize()
 			return;
-		}
-		return this.token;
 	}
 
   constructor() { }
