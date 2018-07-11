@@ -3,7 +3,7 @@
 		<div class="col">
 			<app-item-list [items]="playlists"
 							[selected] = "selected"
-							(selectedChange)="selected = $event"></app-item-list>
+							(selectedChange)="select($event)"></app-item-list>
 		</div>
 		<div class="col">
 			<p *ngIf="!selected">

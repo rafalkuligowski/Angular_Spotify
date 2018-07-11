@@ -1,4 +1,28 @@
 
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+	<div class="container">
+		<a class="navbar-brand" routerLink="/" routerLinkActive="active" 
+		[routerLinkActiveOptions]="{exact:true}">
+			Music App
+		</a>
+		<div class="collapse navbar-collapse">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" routerLink="/playlist" routerLinkActive="active">
+						Playlist
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" routerLink="/music" routerLinkActive="active">
+						Search Music
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+
 <div class="container">
 	<div class="row">
 		<div class="col">
@@ -6,6 +30,7 @@
 			<h1>
 				Welcome to {{ title }}!
 			</h1>
+
 			<router-outlet></router-outlet>
 		</div>
 	</div>

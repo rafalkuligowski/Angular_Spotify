@@ -12,10 +12,21 @@ const routes:Routes = [
 	{
 		path: 'playlist',
 		component: PlaylistsComponent
+		
+	},
+	{
+		path: 'playlist/:id',
+		component: PlaylistsComponent
+		
 	},
 	{
 		path: 'music',
 		component: MusicSearchComponent
+	},
+	{
+		path: "**",
+		redirectTo: "music",
+		pathMatch: "full"
 	}
 ]
 
@@ -23,7 +34,6 @@ const routes:Routes = [
 	imports:[
 		RouterModule.forRoot(routes, {
 			enableTracing: true,
-			useHash: true
 		})
 	],
 	exports: [
